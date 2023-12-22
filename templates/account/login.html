@@ -4,69 +4,86 @@
 {% load account socialaccount %}
 {% load crispy_forms_tags %}
 
+{# Início do bloco de título da página #}
 {% block title %}Sign In{% endblock title %}
     
+{# Início do conteúdo principal da página #}
 {% block content %}
-                <div class="p-lg-5 p-4">
-                    <div>
-                        <h5 class="text-primary">Welcome Back !</h5>
-                        <p class="text-muted">Sign in to continue to Velzon.</p>
-                    </div>
+    <div class="p-lg-5 p-4">
+        <div>
+            <h5 class="text-primary">Bem vindo (a) de volta !</h5>
+            <p class="text-muted">Faça login para continuar no Genesis.</p>
+        </div>
 
-                    <div class="mt-4">
-                        <div class="mt-4">
-                            <form class="needs-validation" novalidate method="POST" action="{% url 'account_login' %}">
-                                {% for message in messages %}
-                                <div class="alert {{ message.tags }} mb-4" role="alert">
-                                    <strong>{{ message }}</strong>
-                                </div>
-                                {% endfor %} 
-                                {% if field.help_text %}
-                                    <div class="alert alert-danger mb-4" role="alert">
-                                        <strong>{{ field.help_text }}</strong>
-                                    </div>
-                                {% endif %}
-                                {% csrf_token %}
-                                <div class="mb-3">
-                                    {{ form.login|as_crispy_field }}
-                                </div>
-
-                                <div class="mb-3 position-relative">
-                                    <div class="float-end">
-                                        <a href="{% url 'account_reset_password' %}" class="text-muted">Forgot password?</a>
-                                    </div>
-                                    {{ form.password|as_crispy_field }}
-                                    <button class="btn btn-link position-absolute mt-4 end-0 top-0 text-decoration-none text-muted" type="button" id="password-addon"><i class="ri-eye-fill align-middle"></i></button>
-                                </div>
-
-                                <div class="form-check">
-                                    {{ form.remember|as_crispy_field }}
-                                </div>
-                                
-                                <div class="mt-4">
-                                    <button class="btn btn-success w-100" type="submit">Sign In</button>
-                                </div>
-                            </form>
-                            <div class="mt-4 text-center">
-                                <div class="signin-other-title">
-                                    <h5 class="fs-13 mb-4 title">Sign In with</h5>
-                                </div>
-                                    <div> 
-                                        <a href="{% provider_login_url 'google' %}" class="btn btn-danger btn-icon waves-effect waves-light"><i class="ri-google-fill fs-16"></i></a>
-                                    </div>
-                            </div>
-                            
-                        </div>
-                    </div>
-
-                    <div class="mt-5 text-center">
-                        <p class="mb-0">Don't have an account ? <a href="{{ signup_url }}" class="fw-semibold text-primary text-decoration-underline"> Signup</a> </p>
-                    </div>
+        {# Início do bloco de formulário de login #}
+        <div class="mt-4">
+            <form class="needs-validation" novalidate method="POST" action="{% url 'account_login' %}">
+                {# Loop para exibir mensagens do sistema (ex: erros, alertas) #}
+                {% for message in messages %}
+                <div class="alert {{ message.tags }} mb-4" role="alert">
+                    <strong>{{ message }}</strong>
                 </div>
-{% endblock content %}
+                {% endfor %} 
+                {# Exibe mensagens de ajuda, se houver #}
+                {% if field.help_text %}
+                    <div class="alert alert-danger mb-4" role="alert">
+                        <strong>{{ field.help_text }}</strong>
+                    </div>
+                {% endif %}
+                {% csrf_token %}
+                {# Campo de entrada para o login #}
+                <div class="mb-3">
+                    {{ form.login|as_crispy_field }}
+                </div>
 
-{% block extra_js %}
-        <!-- password-addon init -->
+                {# Campo de senha com a opção de mostrar/ocultar senha #}
+                <div class="mb-3 position-relative">
+                    <div class="float-end">
+                        <a href="{% url 'account_reset_password' %}" class="text-muted">Esqueceu sua senha?</a>
+                    </div>
+                    {{ form.password|as_crispy_field }}
+                    <button class="btn btn-link position-absolute mt-4 end-0 top-0 text-decoration-none text-muted" type="button" id="password-addon"><i class="ri-eye-fill align-middle"></i></button>
+                </div>
+
+                {# Opção para lembrar o login do usuário #}
+                <div class="form-check">
+                    {{ form.remember|as_crispy_field }}
+                </div>
+                
+                {# Botão de envio do formulário #}
+                <div class="mt-4">
+                    <button class="btn btn-success w-100" type="submit">Entrar</button>
+                </div>
+            </form>
+            {# Continuação do formulário de login #}
+            <div class="mt-4 text-center">
+                <p class="mb-0">Não tem uma conta? <a href="{{ signup_url }}" class="fw-semibold text-primary text-decoration-underline"> Fale com o Suporte</a> </p>
+                <div class="signin-other-title">
+                    <!-- Foi retirado dessa linha: <h5 class="fs-13 mb-4 title">Sign In with</h5> -->
+                </div>
+                <div> 
+                    <!-- Foi retirado dessa linha a Tag de Template de Login Social -->
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    {# Seção com link para criar uma nova conta #}
+    <!-- Foi retirado dessa linha: <div class="mt-5 text-center"> -->
+        <!-- Foi retirado dessa linha: <p class="mb-0">Não tem uma conta? <a href="{{ signup_url }}" class="fw-semibold text-primary text-decoration-underline"> Fale com o Suporte</a> </p> -->
+    </div>
+</div>
+
+    {# Fechamento do bloco de conteúdo da página #}
+    {% endblock content %}
+
+    {# Bloco para inclusão de scripts JavaScript adicionais #}
+    {% block extra_js %}
+    <!-- password-addon init -->
+        {# Script para inicializar a funcionalidade de adicionar um ícone para mostrar/ocultar a senha #}
         <script src="{% static 'js/pages/password-addon.init.js'%}"></script>
-{% endblock extra_js %}
-    
+    {% endblock extra_js %}
+
+
+
