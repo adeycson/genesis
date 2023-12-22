@@ -1,32 +1,45 @@
 from django.contrib import admin
-from . models import CrmContact,CrmCompany,CrmLead,JobApplication,EcommerceOrder,EcommerceCustomer,TicketList
+from .models import (
+    CrmContact, CrmCompany, CrmLead, JobApplication, EcommerceOrder,
+    EcommerceCustomer, TicketList, Empresa, Usuario
+)
 
-# Register your models here.
-
+# Registro dos modelos CrmContact, CrmCompany, etc.
 @admin.register(CrmContact)
 class CrmContactAdmin(admin.ModelAdmin):
-    list_display = ['name','company_name','designation','email_id','phone','lead_score','tags','profile_pic']
-    
+    list_display = ['name', 'company_name', 'designation', 'email_id', 'phone', 'lead_score', 'tags', 'profile_pic']
+
 @admin.register(CrmCompany)
 class CrmCompanyAdmin(admin.ModelAdmin):
-    list_display = ['name','owner_name','industry_type','rating','location','employee','website','contact_email','logo']
-    
+    list_display = ['name', 'owner_name', 'industry_type', 'rating', 'location', 'employee', 'website', 'contact_email', 'logo']
+
 @admin.register(CrmLead)
 class CrmLeadAdmin(admin.ModelAdmin):
-    list_display = ['name','company_name','lead_score','phone','location','tags','profile_pic']
-    
+    list_display = ['name', 'company_name', 'lead_score', 'phone', 'location', 'tags', 'profile_pic']
+
 @admin.register(JobApplication)
 class JobApplicationAdmin(admin.ModelAdmin):
-    list_display = ['company_name','designation','apply_date','contact','type','status','profile_pic']
-    
+    list_display = ['company_name', 'designation', 'apply_date', 'contact', 'type', 'status', 'profile_pic']
+
 @admin.register(EcommerceOrder)
 class EcommerceOrderAdmin(admin.ModelAdmin):
-    list_display = ['name','product','order_date','amount','payment_method','status']
-    
+    list_display = ['name', 'product', 'order_date', 'amount', 'payment_method', 'status']
+
 @admin.register(EcommerceCustomer)
 class EcommerceCustomerAdmin(admin.ModelAdmin):
-    list_display = ['name','email_id','phone','joining_date','status']
-    
+    list_display = ['name', 'email_id', 'phone', 'joining_date', 'status']
+
 @admin.register(TicketList)
 class TicketListAdmin(admin.ModelAdmin):
-    list_display = ['title','client_name','assign_to','create_date','due_date','status','priority']
+    list_display = ['title', 'client_name', 'assign_to', 'create_date', 'due_date', 'status', 'priority']
+
+# Registro dos novos modelos Empresa e Usuario
+@admin.register(Empresa)
+class EmpresaAdmin(admin.ModelAdmin):
+    list_display = ['nome', 'cnpj', 'endereco', 'telefone_contato', 'email_contato', 'cor_tema', 'logo']
+    # Adicione mais opções de administração se necessário
+
+@admin.register(Usuario)
+class UsuarioAdmin(admin.ModelAdmin):
+    list_display = ['username', 'first_name', 'last_name', 'email', 'telefone', 'cargo', 'empresa']
+    # Adicione mais opções de administração se necessário

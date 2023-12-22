@@ -1,4 +1,6 @@
 from django.db import models
+from django.utils.translation import gettext_lazy as _
+from django.contrib.auth.models import AbstractUser, Group, Permission
 from multiselectfield import MultiSelectField
 
 # Create your models here.
@@ -79,6 +81,51 @@ PRIORITY = (
     ('Low','Low'),
     ('Medium','Medium')
 )
+
+# Modelo para Empresa
+class Empresa(models.Model):
+    nome = models.CharField(max_length=255, verbose_name=_('Nome da Empresa'))
+    cnpj = models.CharField(max_length=14, unique=True, verbose_name=_('CNPJ'))
+    endereco = models.TextField(verbose_name=_('Endereço completo'))
+    telefone_contato = models.CharField(max_length=20, verbose_name=_('Telefone de contato'))
+    email_contato = models.EmailField(verbose_name=_('E-mail de contato'))
+    cor_tema = models.CharField(max_length=7, default='#FFFFFF', verbose_name=_('Cor do Tema'), help_text=_('Insira um código de cor hexadecimal.'))
+    logo = models.ImageField(upload_to='logos/', verbose_name=_('Logotipo da Empresa'), null=True, blank=True)
+
+    def __str__(self):
+        return self.nome
+
+# Modelo de Usuário Customizado
+class Usuario(AbstractUser):
+    telefone = models.CharField(max_length=20, verbose_name=_('Telefone de contato'))
+    cargo = models.CharField(max_length=255, verbose_name=_('Cargo'))
+    empresa = models.ForeignKey('Empresa', on_delete=models.CASCADE, verbose_name=_('Empresa associada'), related_name='usuarios')
+
+    # Redefine groups e user_permissions com related_name para evitar conflitos
+    groups = models.ManyToManyField(
+        Group,
+        verbose_name=_('groups'),
+        blank=True,
+        help_text=_('The groups this user belongs to. A user will get all permissions granted to each of their groups.'),
+        related_name="usuario_groups",
+        related_query_name="usuario",
+    )
+    user_permissions = models.ManyToManyField(
+        Permission,
+        verbose_name=_('user permissions'),
+        blank=True,
+        help_text=_('Specific permissions for this user.'),
+        related_name="usuario_user_permissions",
+        related_query_name="usuario",
+    )
+
+    def __str__(self):
+        # Retorna o nome completo se disponível, caso contrário, o nome de usuário
+        return self.get_full_name() or self.username
+
+    class Meta:
+        verbose_name = _('Usuário')
+        verbose_name_plural = _('Usuários')
 
 class CrmContact(models.Model):
     profile_pic = models.ImageField(upload_to="images/contact",blank=True,null=True)
