@@ -11,7 +11,7 @@
                                     <img src="{% static 'images/logo_genesis_sem_texto_PNG.png'%}" alt="" height="22">
                                 </span>
                                 <span class="logo-lg">
-                                    <img src="{% static 'images/logo_genesis_texto_preto.svg'%}" alt="" height="17">
+                                    <img src="{{ request.tenant.logo.url }}" alt="Logo da Empresa" height="90">
                                 </span>
                             </a>
 
@@ -20,7 +20,7 @@
                                     <img src="{% static 'images/images/logo_genesis_sem_texto_PNG.png'%}" alt="" height="22">
                                 </span>
                                 <span class="logo-lg">
-                                    <img src="{% static 'images/logo_genesis_texto_branco.svg'%}" alt="" height="17">
+                                    <img src="{{ request.tenant.logo.url }}" alt="Logo da Empresa" height="90">
                                 </span>
                             </a>
                         </div>

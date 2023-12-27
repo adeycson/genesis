@@ -1,7 +1,10 @@
+from django.contrib.auth.models import AbstractUser, Group, Permission
+from django.core.validators import FileExtensionValidator
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from django.contrib.auth.models import AbstractUser, Group, Permission
 from multiselectfield import MultiSelectField
+
 
 # Create your models here.
 
@@ -96,17 +99,34 @@ class Empresa(models.Model):
         return self.nome
 
 # Modelo de Usuário Customizado
+def validate_file_size(value):
+    filesize = value.size
+    if filesize > 5242880:  # 5MB
+        raise ValidationError(_("O tamanho máximo do arquivo que você pode carregar é de 5 MB"))
+    else:
+        return value
+
 class Usuario(AbstractUser):
     telefone = models.CharField(max_length=20, verbose_name=_('Telefone de contato'))
     cargo = models.CharField(max_length=255, verbose_name=_('Cargo'))
     empresa = models.ForeignKey('Empresa', on_delete=models.CASCADE, verbose_name=_('Empresa associada'), related_name='usuarios')
+    profile_picture = models.ImageField(
+        upload_to='profile_pictures/',
+        validators=[
+            FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png']),
+            validate_file_size
+        ],
+        blank=True, null=True,
+        verbose_name=_('Foto de perfil')
+    )
+    
 
     # Redefine groups e user_permissions com related_name para evitar conflitos
     groups = models.ManyToManyField(
         Group,
         verbose_name=_('groups'),
         blank=True,
-        help_text=_('The groups this user belongs to. A user will get all permissions granted to each of their groups.'),
+        help_text=_('Os grupos aos quais este usuário pertence. Um usuário obterá todas as permissões concedidas a cada um de seus grupos.'),
         related_name="usuario_groups",
         related_query_name="usuario",
     )

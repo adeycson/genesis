@@ -10,7 +10,7 @@
                         <img src="{% static 'images/logo_genesis_sem_texto_PNG.png'%}" alt="" height="22">
                     </span>
                     <span class="logo-lg">
-                        <img src="{% static 'images/logo_genesis_texto_preto.svg'%}" alt="" height="90">
+                        <img src="{{ request.tenant.logo.url }}" alt="Logo da Empresa" height="90">
                     </span>
                 </a>
                 <!-- Light Logo-->
@@ -19,7 +19,7 @@
                         <img src="{% static 'images/logo_genesis_sem_texto_PNG.png'%}" alt="" height="22">
                     </span>
                     <span class="logo-lg">
-                        <img src="{% static 'images/logo_genesis_texto_branco.svg'%}" alt="" height="90">
+                        <img src="{{ request.tenant.logo.url }}" alt="Logo da Empresa" height="90">
                     </span>
                 </a>
                 <button type="button" class="btn btn-sm p-0 fs-20 header-item float-end btn-vertical-sm-hover" id="vertical-hover">
