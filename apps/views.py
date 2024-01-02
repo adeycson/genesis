@@ -4,6 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import CrmContact,CrmCompany,CrmLead,JobApplication,EcommerceOrder,EcommerceCustomer,TicketList
 from .forms import *
 from django.contrib import messages
+from .models import Negocio
 
 # Create your views here.
 class AppsView(LoginRequiredMixin,TemplateView):
@@ -95,6 +96,22 @@ apps_todo_view = AppsView.as_view(template_name="apps/apps-todo.html")
 
 apps_api_key_view = AppsView.as_view(template_name="apps/apps-api-key.html")
 
+def negociacoes_kanban_view(request):
+    negociacoes = Negocio.objects.all()
+    return render(request, 'apps/negociacao/apps-negociacao-kanban.html', {'negociacoes': negociacoes})
+
+def negociacoes_list_view(request):
+    # Aqui você pode adicionar a lógica para buscar e passar as negociações para a view de lista
+    negociacoes = Negocio.objects.all()
+    return render(request, 'apps/negociacao/apps-negociacao-list.html', {'negociacoes': negociacoes})
+
+def negociacao_details_view(request, id_negociacao):
+    negociacao = Negocio.objects.get(id=id_negociacao)
+        # Esta view pode ser usada para mostrar os detalhes de uma negociação específica
+    # Por exemplo, você pode pegar um ID de negociação da URL e buscar essa negociação
+    # negociacao = Negocio.objects.get(id=id_negociacao)
+    # return render(request, 'apps/negociacao/apps-negociacao-details.html', {'negociacao': negociacao})
+    return render(request, 'apps/negociacao/apps-negociacao-details.html', {'negociacao': negociacao})
 
 # Crm Contact views
 def apps_crm_contacts_view(request,pk):

@@ -4,6 +4,8 @@ from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from multiselectfield import MultiSelectField
+from django.contrib.auth.models import User
+import datetime
 
 
 # Create your models here.
@@ -84,6 +86,54 @@ PRIORITY = (
     ('Low','Low'),
     ('Medium','Medium')
 )
+
+# Definições das tuplas de escolha (você precisará ajustar esses valores)
+STATUS_NEGOCIO_CHOICES = (
+    ('ativo', 'Ativo'),
+    ('inativo', 'Inativo'),
+    # Adicione mais opções conforme necessário
+)
+
+FASE_FUNIL_CHOICES = (
+    ('prospeccao', 'Prospecção'),
+    ('negociacao', 'Negociação'),
+    # Adicione mais opções conforme necessário
+)
+
+ORIGEM_LEAD_CHOICES = (
+    ('site', 'Site'),
+    ('telefone', 'Telefone'),
+    # Adicione mais opções conforme necessário
+)
+
+CATEGORIA_CLIENTE_CHOICES = (
+    ('vip', 'VIP'),
+    ('regular', 'Regular'),
+    # Adicione mais opções conforme necessário
+)
+
+class Negocio(models.Model):
+    nome = models.CharField(max_length=100)
+    status = models.CharField(max_length=20, choices=STATUS_NEGOCIO_CHOICES)
+    fase_funil = models.CharField(max_length=100, choices=FASE_FUNIL_CHOICES)
+    data_prevista_fechamento = models.DateField()
+    responsavel = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    empresa_relacionada = models.CharField(max_length=100)
+    nome_contato = models.CharField(max_length=100)
+    telefone_contato = models.CharField(max_length=20)
+    email_contato = models.EmailField()
+    origem_lead = models.CharField(max_length=100, choices=ORIGEM_LEAD_CHOICES)
+    perfil_cliente = models.TextField()
+    numero_orcamento = models.CharField(max_length=100)
+    localizacao = models.CharField(max_length=100)
+    historico_interacoes = models.TextField()
+    arquivos_anexados = models.FileField(upload_to='negociacoes/')
+    cargo_contato = models.CharField(max_length=100, blank=True, null=True)
+    tipo_produto_servico = models.CharField(max_length=100, blank=True, null=True)
+    categoria_cliente = models.CharField(max_length=50, choices=CATEGORIA_CLIENTE_CHOICES, blank=True, null=True)
+
+    def __str__(self):
+        return self.nome
 
 # Modelo para Empresa
 class Empresa(models.Model):

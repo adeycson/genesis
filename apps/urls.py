@@ -1,4 +1,5 @@
 from django.urls import path
+from .views import negociacoes_kanban_view, negociacoes_list_view, negociacao_details_view
 from apps.views import(
     apps_calendar_view,
     apps_calendar_month_grid_view,
@@ -81,6 +82,11 @@ from apps.views import(
 app_name = "apps"
 
 urlpatterns = [
+    path('kanban/negociacoes/', negociacoes_kanban_view, name='kanban_negociacoes'),
+    path('list/negociacoes/', negociacoes_list_view, name='list_negociacoes'),
+    path('detalhes/negociacao/<int:id_negociacao>/', negociacao_details_view, name='detalhes_negociacao'),
+
+
     # Calendar
     path("calendar", view=apps_calendar_view, name="calendar"),
     path("calendar_month_grid", view=apps_calendar_month_grid_view, name="calendar_month_grid"),
