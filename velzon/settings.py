@@ -113,12 +113,12 @@ WSGI_APPLICATION = 'velzon.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql', 
-        'NAME': 'genesis_db', 
-        'USER': 'adeycson', 
-        'PASSWORD': 'genesis#@!',
-        'HOST': '127.0.0.1', 
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'saas_db',  # Nome do banco de dados
+        'USER': 'adeycson',  # Nome de usuário do banco de dados
+        'PASSWORD': 'gnzZREX55Zr0MmMp6fUE5eHKOzdJc4TZ',  # Senha do banco de dados
+        'HOST': 'dpg-cmui4gf109ks73c2klm0-a.oregon-postgres.render.com',  # Host do banco de dados
+        'PORT': '5432',  # Porta do banco de dados
     }
 }
 
@@ -161,9 +161,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR,"static")]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 # Default primary key field type
