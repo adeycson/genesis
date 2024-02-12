@@ -9,227 +9,258 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
+# Importa o módulo os para interagir com o sistema operacional.
 import os
+# Importa a classe Path do módulo pathlib para manipulação de caminhos de arquivos de forma orientada a objetos.
 from pathlib import Path
+# Importa o módulo constants do django.contrib.messages, renomeando-o para messages, para facilitar a configuração de mensagens.
 from django.contrib.messages import constants as messages
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+# Define o diretório base do projeto como sendo o diretório pai do diretório atual do arquivo (normalmente o diretório raiz do projeto).
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Início da configuração básica para desenvolvimento, não recomendada para ambientes de produção.
+# Documentação para checklist de implantação: https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
+# AVISO DE SEGURANÇA: Mantenha a chave secreta usada em produção como segredo!
 SECRET_KEY = 'django-insecure-j%^*y0krq5^-#3lggoecxw!d7ad_gqkab3t5w17&0w06+qf8+8'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+# AVISO DE SEGURANÇA: não execute com o modo debug ativado em produção!
+DEBUG = True
 
+# Define os hosts permitidos para a aplicação. O '*' permite acessos de qualquer host.
 ALLOWED_HOSTS = ['*']
 
-
-# Application definition
+# Início da definição da aplicação
+# Lista de apps padrões do Django que são incluídos por padrão para fornecer funcionalidades básicas ao projeto.
 DEFAULT_APPS = [    
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'django.contrib.sites',
+    'django.contrib.admin',  # Adiciona o sistema de administração.
+    'django.contrib.auth',  # Adiciona o sistema de autenticação.
+    'django.contrib.contenttypes',  # Adiciona um framework para tipos de conteúdo.
+    'django.contrib.sessions',  # Adiciona um framework para gerenciamento de sessões.
+    'django.contrib.messages',  # Adiciona um framework para gerenciamento de mensagens entre views.
+    'django.contrib.staticfiles',  # Adiciona um framework para gerenciamento de arquivos estáticos.
+    'django.contrib.sites',  # Adiciona um framework para gerenciamento de múltiplos sites com um único projeto Django.
+]
+
     
-    ]
+# Define uma lista de aplicativos locais específicos do seu projeto.
 LOCAL_APPS = [
-    "dashboards",
-    "apps",
-    "layouts",
-    "components",
-    "pages"
-    ]
+    "dashboards",  # App para dashboards personalizados.
+    "apps",  # App genérica, possivelmente para funcionalidades diversas.
+    "layouts",  # App para definições de layouts.
+    "components",  # App para componentes reutilizáveis.
+    "pages"  # App para páginas estáticas ou dinâmicas.
+]
+
+# Define uma lista de aplicativos de terceiros que são adicionados para estender a funcionalidade do projeto.
 THIRDPARTY_APPS = [
-    
-    # Crispy Forms
+    # Crispy Forms para gerar formulários bonitos com Django.
     "crispy_forms",
-    "crispy_bootstrap5",
+    "crispy_bootstrap5",  # Tema Bootstrap 5 para Crispy Forms.
     
-    # All Auth
+    # Allauth para autenticação, registro, e gerenciamento de contas.
     'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
+    'allauth.account',  # Módulo de contas para autenticação padrão.
+    'allauth.socialaccount',  # Módulo para autenticação social.
     
-    'allauth.socialaccount.providers.google', 
-    # Google Providers
-    'multiselectfield',
+    'allauth.socialaccount.providers.google',  # Provedor de autenticação específico para o Google.
+    'multiselectfield',  # Campo personalizado para seleção múltipla em formulários.
 ]
 
-INSTALLED_APPS = DEFAULT_APPS +LOCAL_APPS +THIRDPARTY_APPS
+# Compila a lista final de aplicativos instalados, combinando os apps padrão do Django, apps locais e apps de terceiros.
+INSTALLED_APPS = DEFAULT_APPS + LOCAL_APPS + THIRDPARTY_APPS
 
+# Define a lista de middleware que são uma série de hooks e mecanismos de processamento de requisições/respostas.
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'allauth.account.middleware.AccountMiddleware',
+    'django.middleware.security.SecurityMiddleware',  # Adiciona várias melhorias de segurança.
+    'django.contrib.sessions.middleware.SessionMiddleware',  # Gerencia sessões entre requisições.
+    'django.middleware.common.CommonMiddleware',  # Fornece diversos comportamentos comuns a várias aplicações (redirecionamentos, erros de página não encontrada, etc.).
+    'django.middleware.csrf.CsrfViewMiddleware',  # Proteção contra ataques CSRF.
+    'django.contrib.auth.middleware.AuthenticationMiddleware',  # Associa usuários a requisições usando sessões.
+    'django.contrib.messages.middleware.MessageMiddleware',  # Habilita o armazenamento de mensagens em uma única requisição e sua recuperação na próxima requisição.
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',  # Previne contra ataques de clickjacking.
+    'allauth.account.middleware.AccountMiddleware',  # Middleware específico do Allauth para gerenciar contas.
 ]
 
+
+# Define a configuração de URL raiz do projeto, indicando ao Django onde encontrar as definições de URL para o projeto inteiro.
 ROOT_URLCONF = 'velzon.urls'
 
+# Configurações de templates do Django, definindo como os templates são carregados e processados.
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
-        'APP_DIRS': True,
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',  # Define o backend de templates a ser usado, no caso, o padrão do Django.
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],  # Especifica um diretório onde o Django deve procurar por arquivos de template personalizados.
+        'APP_DIRS': True,  # Permite ao Django procurar por templates dentro de diretórios específicos das apps.
         'OPTIONS': {
             'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.debug',  # Adiciona a variável booleana 'debug' ao contexto dos templates.
+                'django.template.context_processors.request',  # Adiciona o objeto 'request' ao contexto dos templates.
+                'django.contrib.auth.context_processors.auth',  # Adiciona variáveis relacionadas à autenticação ao contexto dos templates.
+                'django.contrib.messages.context_processors.messages',  # Adiciona mensagens ao contexto dos templates.
             ],
         },
     },
 ]
 
+# Configura os backends de autenticação, que permitem diferentes métodos de autenticação para os usuários.
 AUTHENTICATION_BACKENDS = [
-    # Needed to login by username in Django admin, regardless of `allauth`
+    # Necessário para fazer login pelo nome de usuário no admin do Django, independente do `allauth`.
     'django.contrib.auth.backends.ModelBackend',
-    # `allauth` specific authentication methods, such as login by e-mail
+    # Métodos de autenticação específicos do `allauth`, como login por e-mail.
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
+# Define os pacotes de templates que são permitidos pelo Crispy Forms, neste caso, especificando "bootstrap5".
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+# Define o pacote de templates a ser usado por padrão pelo Crispy Forms, também "bootstrap5".
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 
+
+# Especifica o objeto de aplicação WSGI do Django que o servidor web deve usar para comunicar com o Django.
 WSGI_APPLICATION = 'velzon.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-
+# Configuração do banco de dados
+# Documentação sobre configurações de banco de dados em Django: https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'saas_db',  # Nome do banco de dados
-        'USER': 'adeycson',  # Nome de usuário do banco de dados
-        'PASSWORD': 'gnzZREX55Zr0MmMp6fUE5eHKOzdJc4TZ',  # Senha do banco de dados
-        'HOST': 'dpg-cmui4gf109ks73c2klm0-a.oregon-postgres.render.com',  # Host do banco de dados
-        'PORT': '5432',  # Porta do banco de dados
+    'default': {  # Configuração para o banco de dados padrão.
+        'ENGINE': 'django.db.backends.postgresql',  # Define o motor do banco de dados como PostgreSQL.
+        'NAME': 'saas_db',  # Nome do banco de dados.
+        'USER': 'adeycson',  # Nome de usuário para autenticação no banco de dados.
+        'PASSWORD': 'gnzZREX55Zr0MmMp6fUE5eHKOzdJc4TZ',  # Senha para autenticação no banco de dados.
+        'HOST': 'dpg-cmui4gf109ks73c2klm0-a.oregon-postgres.render.com',  # Endereço do servidor do banco de dados.
+        'PORT': '5432',  # Porta TCP para conexão com o banco de dados.
     }
 }
 
-
-
-# Password validation
-# https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
-
+# Validação de senha
+# Documentação sobre validadores de senha em Django: https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        # Valida se a senha é muito similar a atributos do usuário.
     },
     {
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        # Valida se a senha tem um comprimento mínimo definido.
     },
     {
         'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        # Valida se a senha não é comum demais.
     },
     {
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        # Valida se a senha não é inteiramente numérica.
     },
 ]
 
 
-# Internationalization
-# https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = 'pt-br'
+# Configurações de internacionalização
+# Documentação sobre internacionalização (i18n) em Django: https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-TIME_ZONE = 'America/Sao_Paulo'
+LANGUAGE_CODE = 'pt-br'  # Define o código de idioma padrão para 'Português Brasil'.
 
-USE_I18N = True
+TIME_ZONE = 'America/Sao_Paulo'  # Define a zona de tempo padrão para 'America/Sao_Paulo'.
 
-USE_L10N = True
+USE_I18N = True  # Habilita o sistema de internacionalização do Django.
 
-USE_TZ = True
+USE_L10N = True  # Habilita a localização para formatar datas, números e calendários de acordo com o locale do usuário.
+
+USE_TZ = True  # Habilita o suporte a fuso horário.
+
+# Configurações de arquivos estáticos (CSS, JavaScript, Imagens)
+# Documentação sobre como servir arquivos estáticos em Django: https://docs.djangoproject.com/en/3.2/howto/static-files/
+
+STATIC_URL = '/static/'  # URL para usar ao referenciar arquivos estáticos localizados em STATIC_ROOT.
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]  # Define o(s) diretório(s) onde o Django buscará arquivos estáticos adicionais, além de cada app 'static' diretor.
+STATIC_ROOT = BASE_DIR / 'staticfiles'  # Localização no sistema de arquivos onde os arquivos estáticos serão coletados.
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # Diretório base onde os arquivos de mídia serão armazenados.
+MEDIA_URL = '/media/'  # URL para servir os arquivos de mídia armazenados em MEDIA_ROOT.
+
+# Configuração padrão do tipo de campo de chave primária
+# Documentação sobre configuração do campo automático padrão: https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'  # Define o tipo de campo auto-incrementável padrão para as chaves primárias dos modelos como BigAutoField.
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/3.2/howto/static-files/
-
-STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
-STATIC_ROOT = BASE_DIR / 'staticfiles'
-
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
-
-# Default primary key field type
-# https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
-
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-#  Messages customize
-
+# Personalização das tags de mensagens
+# Associa cada nível de mensagem do Django a uma classe CSS para estilização com o Bootstrap.
 MESSAGE_TAGS = {
-    messages.DEBUG: "alert-info",
-    messages.INFO: "alert-info",
-    messages.SUCCESS: "alert-success",
-    messages.WARNING: "alert-warning",
-    messages.ERROR: "alert-danger",
+    messages.DEBUG: "alert-info",  # Mensagens de depuração são estilizadas como alertas de informação.
+    messages.INFO: "alert-info",  # Mensagens informativas também recebem a mesma estilização de alerta de informação.
+    messages.SUCCESS: "alert-success",  # Mensagens de sucesso são estilizadas com alerta de sucesso.
+    messages.WARNING: "alert-warning",  # Mensagens de aviso são estilizadas como alertas de aviso.
+    messages.ERROR: "alert-danger",  # Mensagens de erro são estilizadas como alertas de perigo.
 }
 
+# Configuração do SMTP para envio de e-mails
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'  # Define o backend de e-mail para utilizar SMTP.
+EMAIL_HOST = 'smtp.sendgrid.net'  # Especifica o servidor SMTP do SendGrid como o servidor de e-mail.
+EMAIL_PORT = 587  # Define a porta 587 para conexão TLS.
+EMAIL_USE_TLS = True  # Habilita o uso de TLS para a conexão de e-mail, uma prática segura para transmissão de dados.
+EMAIL_HOST_USER = 'crm@sistemagenesis.tech'  # Endereço de e-mail verificado do SendGrid utilizado como remetente.
+EMAIL_HOST_PASSWORD = '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'  # Chave de API do SendGrid usada para autenticação no servidor SMTP.
+DEFAULT_FROM_EMAIL = 'crm@sistemagenesis.tech'  # Define o e-mail padrão de remetente para os e-mails enviados.
 
-# SMTP Configure
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.sendgrid.net'  # Servidor SMTP do SendGrid
-EMAIL_PORT = 587  # Porta para conexão TLS
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'crm@sistemagenesis.tech'  # Seu endereço de e-mail verificado do SendGrid
-EMAIL_HOST_PASSWORD = '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'  # Sua chave de API do SendGrid
-DEFAULT_FROM_EMAIL = 'crm@sistemagenesis.tech'  # E-mail padrão para envio
+EMAIL_SSL_CERTFILE = False  # Desabilita a configuração de caminho para o certificado SSL, não necessário para TLS.
+EMAIL_SSL_KEYFILE = False  # Desabilita a configuração de caminho para a chave SSL, também não necessário para TLS.
 
 
-#  All Auth Configurations
+# Configurações do AllAuth
 
+# Define a URL para redirecionar os usuários após o login bem-sucedido.
 LOGIN_REDIRECT_URL = "/"
-LOGIN_URL = "account_login"
-ACCOUNT_LOGOUT_ON_GET = False
-ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_EMAIL_VERIFICATION = "mandatory"
-ACCOUNT_AUTHENTICATED_LOGIN_REDIRECTS =True
 
+# Define a URL de login, usada para redirecionar usuários não autenticados que tentam acessar páginas que requerem autenticação.
+LOGIN_URL = "account_login"
+
+# Determina se o logout pode ser feito com um GET simples. False aumenta a segurança ao exigir um POST para logout.
+ACCOUNT_LOGOUT_ON_GET = False
+
+# Obriga os usuários a fornecerem um endereço de e-mail ao se registrarem.
+ACCOUNT_EMAIL_REQUIRED = True
+
+# Define a verificação de e-mail como obrigatória ('mandatory'), o que significa que o usuário precisa verificar seu e-mail para concluir o registro.
+ACCOUNT_EMAIL_VERIFICATION = "mandatory"
+
+# Redireciona usuários autenticados que tentam acessar a página de login ou registro para a página inicial.
+ACCOUNT_AUTHENTICATED_LOGIN_REDIRECTS = True
+
+# Garante que o e-mail usado no registro seja único.
 ACCOUNT_UNIQUE_EMAIL = True
+
+# Permite que o login via autenticação social seja feito através de um GET.
 SOCIALACCOUNT_LOGIN_ON_GET = True
 
-# All Auth Forms Customization 
-
+# Personalização de formulários do AllAuth
+# Especifica caminhos para formulários personalizados que substituem os padrões do AllAuth para várias ações.
 ACCOUNT_FORMS = {
-    "login": "velzon.forms.UserLoginForm",
-    "signup": "velzon.forms.UserRegistrationForm",
-    "change_password": "velzon.forms.PasswordChangeForm",
-    "set_password": "velzon.forms.PasswordSetForm",
-    "reset_password": "velzon.forms.PasswordResetForm",
-    "reset_password_from_key": "velzon.forms.PasswordResetKeyForm",
+    "login": "velzon.forms.UserLoginForm",  # Formulário personalizado para login.
+    "signup": "velzon.forms.UserRegistrationForm",  # Formulário personalizado para registro.
+    "change_password": "velzon.forms.PasswordChangeForm",  # Formulário personalizado para alteração de senha.
+    "set_password": "velzon.forms.PasswordSetForm",  # Formulário personalizado para definir a senha.
+    "reset_password": "velzon.forms.PasswordResetForm",  # Formulário personalizado para redefinição de senha.
+    "reset_password_from_key": "velzon.forms.PasswordResetKeyForm",  # Formulário para redefinição de senha com chave.
 }
 
+# Habilita a consulta de e-mail para contas de mídia social, útil para preencher automaticamente o campo de e-mail durante o registro.
 SOCIALACCOUNT_QUERY_EMAIL = True
 
-
-
+# Define o ID do site para o django-allauth, útil em projetos com múltiplos sites.
 SITE_ID = 2
 
-# Provider Configurations
+# Configurações específicas para provedores de autenticação social, neste caso, Google.
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
-        'SCOPE': [
+        'SCOPE': [  # Define o escopo de permissões a solicitar.
             'profile',
             'email',
         ],
-        'AUTH_PARAMS': {
+        'AUTH_PARAMS': {  # Parâmetros de autenticação específicos para o Google.
             'access_type': 'online',
         }
     }
