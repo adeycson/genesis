@@ -9,258 +9,266 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-# Importa o módulo os para interagir com o sistema operacional.
+# Imagine que você precisa conversar com o sistema operacional do seu computador, como se quisesse perguntar "onde estou?" ou "como chego até a pasta de documentos?". Para isso, precisamos de uma ferramenta que fale a língua do sistema operacional. O 'import os' é como se contratássemos um intérprete para nos ajudar nessa comunicação.
 import os
-# Importa a classe Path do módulo pathlib para manipulação de caminhos de arquivos de forma orientada a objetos.
+
+# Agora, pense em um mapa que mostra todos os caminhos e atalhos para encontrar arquivos no seu computador. A classe Path é como esse mapa, nos ajudando a encontrar e trabalhar com esses caminhos de uma maneira fácil, quase como se estivéssemos navegando por uma cidade com a ajuda de um GPS.
 from pathlib import Path
-# Importa o módulo constants do django.contrib.messages, renomeando-o para messages, para facilitar a configuração de mensagens.
+
+# Sabe quando você joga um videogame e recebe mensagens na tela informando sobre suas conquistas ou avisos importantes? No Django, usamos algo parecido para comunicar mensagens aos usuários do site. Importar 'constants as messages' é como definir um conjunto de regras sobre como essas mensagens devem aparecer, garantindo que elas sejam entregues de forma clara e no momento certo.
 from django.contrib.messages import constants as messages
 
-# Define o diretório base do projeto como sendo o diretório pai do diretório atual do arquivo (normalmente o diretório raiz do projeto).
+
+# Imagine que você tem uma caixa de ferramentas em sua casa. Para encontrar essa caixa, você precisa saber onde ela está. No nosso projeto, o 'BASE_DIR' funciona como um mapa que mostra onde está a "caixa de ferramentas" do nosso projeto no computador. Ele diz: "Olhe aqui! Aqui é onde tudo começa". Ele faz isso olhando para o lugar onde o mapa (neste caso, o arquivo que estamos editando) está, e então, considera a "casa" (ou diretório raiz do projeto) sendo dois níveis acima.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Início da configuração básica para desenvolvimento, não recomendada para ambientes de produção.
 # Documentação para checklist de implantação: https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
-# AVISO DE SEGURANÇA: Mantenha a chave secreta usada em produção como segredo!
+# Agora, pense em um diário secreto onde você guarda todos os seus segredos. No Django, temos algo parecido chamado 'SECRET_KEY'. É uma chave única que ajuda a manter o nosso site seguro, como uma senha especial que só o nosso projeto conhece. É muito importante que essa chave fique em segredo, especialmente quando outras pessoas podem tentar espiar nossos segredos (ou, em termos de internet, quando nosso site está disponível para o público).
 SECRET_KEY = 'django-insecure-j%^*y0krq5^-#3lggoecxw!d7ad_gqkab3t5w17&0w06+qf8+8'
 
-# AVISO DE SEGURANÇA: não execute com o modo debug ativado em produção!
+
+# Sabe quando você está aprendendo algo novo, e é mais fácil fazer isso em um ambiente onde erros são permitidos e podem ser corrigidos sem grandes consequências? O 'DEBUG = True' é como dizer ao nosso projeto: "Tudo bem cometer erros enquanto aprendemos e construímos". Mas, como em uma sala de aula, onde certas coisas devem ficar entre professor e alunos, não queremos que esses erros sejam vistos por todos quando o site estiver aberto ao público, ou seja, em "produção".
 DEBUG = True
 
-# Define os hosts permitidos para a aplicação. O '*' permite acessos de qualquer host.
+# Imagine que sua casa tem uma porta que só abre com uma chave especial. Mas, se você decidir que não quer usar a chave e deixar a porta aberta para qualquer um entrar, você colocaria um sinal dizendo "Todos são bem-vindos". No nosso projeto, 'ALLOWED_HOSTS = ['*']' é como esse sinal na porta. Dizemos ao nosso site que ele pode aceitar visitas de qualquer lugar, não apenas de alguns convidados especiais. Mas cuidado, em um site real, você quer ter mais controle sobre quem pode visitar.
 ALLOWED_HOSTS = ['*']
 
-# Início da definição da aplicação
-# Lista de apps padrões do Django que são incluídos por padrão para fornecer funcionalidades básicas ao projeto.
+# Agora, vamos pensar no nosso projeto como uma cidade pequena. Essa cidade precisa de serviços básicos para funcionar bem, como uma prefeitura, uma delegacia, uma biblioteca, etc. Em Django, esses serviços são chamados de "apps". A lista 'DEFAULT_APPS' é como o plano da cidade, mostrando todos os serviços essenciais que já vem com ela. Cada 'app' adiciona uma funcionalidade específica, como gerenciar as pessoas da cidade (usuários), guardar livros (conteúdos), organizar eventos (sessões), comunicar notícias (mensagens), mostrar caminhos e placas (arquivos estáticos), e até permitir que a cidade faça parte de um país maior (sites).
 DEFAULT_APPS = [    
-    'django.contrib.admin',  # Adiciona o sistema de administração.
-    'django.contrib.auth',  # Adiciona o sistema de autenticação.
-    'django.contrib.contenttypes',  # Adiciona um framework para tipos de conteúdo.
-    'django.contrib.sessions',  # Adiciona um framework para gerenciamento de sessões.
-    'django.contrib.messages',  # Adiciona um framework para gerenciamento de mensagens entre views.
-    'django.contrib.staticfiles',  # Adiciona um framework para gerenciamento de arquivos estáticos.
-    'django.contrib.sites',  # Adiciona um framework para gerenciamento de múltiplos sites com um único projeto Django.
+    'django.contrib.admin',  # Como a prefeitura, onde se administra a cidade.
+    'django.contrib.auth',  # Como a delegacia, que cuida da segurança e identidade das pessoas.
+    'django.contrib.contenttypes',  # Como a biblioteca, organizando os tipos de conteúdo (livros, revistas).
+    'django.contrib.sessions',  # Como eventos da cidade, que acontecem e depois acabam, mas deixam memórias.
+    'django.contrib.messages',  # Como o sistema de correios, enviando mensagens entre os cidadãos.
+    'django.contrib.staticfiles',  # Como as placas e caminhos da cidade, mostrando onde as coisas estão.
+    'django.contrib.sites',  # Como permitir que nossa cidade faça parte de um país maior, interligando-a a outros lugares.
 ]
 
     
-# Define uma lista de aplicativos locais específicos do seu projeto.
+# LOCAL_APPS são como os departamentos internos da sua empresa SaaS, cada um com uma função crítica para manter a operação fluindo suavemente:
 LOCAL_APPS = [
-    "dashboards",  # App para dashboards personalizados.
-    "apps",  # App genérica, possivelmente para funcionalidades diversas.
-    "layouts",  # App para definições de layouts.
-    "components",  # App para componentes reutilizáveis.
-    "pages"  # App para páginas estáticas ou dinâmicas.
+    "dashboards",  # "dashboards" é o departamento de análise e relatórios, onde dados importantes são organizados para ajudar na tomada de decisões.
+    "apps",  # "apps" é o departamento de projetos especiais, sempre pronto para desenvolver novas ideias e soluções.
+    "layouts",  # "layouts" é a equipe de design de experiência do usuário, garantindo que todos os produtos sejam fáceis de usar e agradáveis.
+    "components",  # "components" é como a engenharia de componentes reutilizáveis, criando blocos de construção que podem ser usados em vários produtos.
+    "pages"  # "pages" é o departamento de conteúdo e comunicação, responsável por criar e manter o conteúdo acessível aos usuários.
 ]
 
-# Define uma lista de aplicativos de terceiros que são adicionados para estender a funcionalidade do projeto.
+# THIRDPARTY_APPS são como os parceiros e fornecedores externos que complementam os serviços que sua empresa SaaS oferece:
 THIRDPARTY_APPS = [
-    # Crispy Forms para gerar formulários bonitos com Django.
-    "crispy_forms",
-    "crispy_bootstrap5",  # Tema Bootstrap 5 para Crispy Forms.
+    "crispy_forms",  # "crispy_forms" é como um parceiro especializado em criar interfaces de formulários atraentes e funcionais para coletar informações dos usuários.
+    "crispy_bootstrap5",  # "crispy_bootstrap5" é o fornecedor de design que trabalha com "crispy_forms" para garantir que tudo esteja no mais alto padrão visual.
     
-    # Allauth para autenticação, registro, e gerenciamento de contas.
-    'allauth',
-    'allauth.account',  # Módulo de contas para autenticação padrão.
-    'allauth.socialaccount',  # Módulo para autenticação social.
+    # Allauth é como uma agência de segurança cibernética contratada para gerenciar o acesso dos usuários e a autenticação, garantindo que apenas pessoas autorizadas possam acessar serviços sensíveis.
+    'allauth',  # O corpo principal da agência de segurança.
+    'allauth.account',  # Especializado em autenticação tradicional, como senhas e nomes de usuário.
+    'allauth.socialaccount',  # Encarregado da autenticação social, permitindo que os usuários se conectem através de suas contas em redes sociais.
     
-    'allauth.socialaccount.providers.google',  # Provedor de autenticação específico para o Google.
-    'multiselectfield',  # Campo personalizado para seleção múltipla em formulários.
+    'allauth.socialaccount.providers.google',  # Um especialista em verificar identidades usando o Google, facilitando um processo de login rápido e seguro.
+    'multiselectfield',  # É como um serviço de personalização, permitindo que os usuários escolham exatamente o que precisam, melhorando a experiência do usuário.
 ]
 
-# Compila a lista final de aplicativos instalados, combinando os apps padrão do Django, apps locais e apps de terceiros.
+
+# INSTALLED_APPS é como o inventário completo dos departamentos e parceiros que a sua empresa SaaS precisa para operar. Aqui, combinamos:
+# 1. Os departamentos internos (DEFAULT_APPS),
+# 2. Equipes de inovação e projetos especiais (LOCAL_APPS),
+# 3. E os parceiros e fornecedores externos (THIRDPARTY_APPS).
+# Juntos, eles formam o ecossistema completo do seu serviço online, garantindo que você tenha todas as funcionalidades necessárias para atender aos seus usuários.
 INSTALLED_APPS = DEFAULT_APPS + LOCAL_APPS + THIRDPARTY_APPS
 
-# Define a lista de middleware que são uma série de hooks e mecanismos de processamento de requisições/respostas.
+# MIDDLEWARE é como o sistema de segurança e operações de um grande edifício de escritórios, onde sua empresa SaaS opera. Cada item na lista funciona como um especialista ou equipe específica que gerencia um aspecto vital do fluxo de trabalho e segurança:
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',  # Adiciona várias melhorias de segurança.
-    'django.contrib.sessions.middleware.SessionMiddleware',  # Gerencia sessões entre requisições.
-    'django.middleware.common.CommonMiddleware',  # Fornece diversos comportamentos comuns a várias aplicações (redirecionamentos, erros de página não encontrada, etc.).
-    'django.middleware.csrf.CsrfViewMiddleware',  # Proteção contra ataques CSRF.
-    'django.contrib.auth.middleware.AuthenticationMiddleware',  # Associa usuários a requisições usando sessões.
-    'django.contrib.messages.middleware.MessageMiddleware',  # Habilita o armazenamento de mensagens em uma única requisição e sua recuperação na próxima requisição.
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',  # Previne contra ataques de clickjacking.
-    'allauth.account.middleware.AccountMiddleware',  # Middleware específico do Allauth para gerenciar contas.
+    'django.middleware.security.SecurityMiddleware',  # Como os guardas de segurança na entrada, protegendo contra invasores e garantindo que tudo esteja seguro.
+    'django.contrib.sessions.middleware.SessionMiddleware',  # Como os recepcionistas, que identificam e orientam os visitantes (usuários) para as áreas corretas, gerenciando suas "sessões" de visita.
+    'django.middleware.common.CommonMiddleware',  # A equipe de manutenção, garantindo que tudo funcione suavemente, corrigindo problemas comuns antes que afetem os usuários.
+    'django.middleware.csrf.CsrfViewMiddleware',  # Especialistas em segurança cibernética, protegendo contra tipos específicos de ataques (CSRF) que tentam enganar o sistema.
+    'django.contrib.auth.middleware.AuthenticationMiddleware',  # Como os sistemas de cartão de acesso, verificando a identidade dos usuários antes de permitir acesso a áreas restritas.
+    'django.contrib.messages.middleware.MessageMiddleware',  # O sistema de comunicação interna, permitindo enviar e receber mensagens importantes durante a "visita" do usuário.
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',  # Como o vidro à prova de balas, protegendo os usuários de tentativas de "sequestro" da interface por sites maliciosos.
+    'allauth.account.middleware.AccountMiddleware',  # A equipe da agência de segurança cibernética, oferecendo serviços adicionais para gerenciar contas de forma mais segura e eficiente.
 ]
 
 
-# Define a configuração de URL raiz do projeto, indicando ao Django onde encontrar as definições de URL para o projeto inteiro.
+# ROOT_URLCONF é como o mapa do shopping center que mostra todas as lojas e onde elas estão localizadas. No nosso sistema SaaS, este "mapa" diz ao Django onde encontrar todas as "lojas" (ou páginas) do nosso site, garantindo que os usuários possam navegar corretamente para onde querem ir.
 ROOT_URLCONF = 'velzon.urls'
 
-# Configurações de templates do Django, definindo como os templates são carregados e processados.
+# TEMPLATES são como os planos de design para cada loja no shopping. Eles dizem como cada loja deve parecer por dentro, onde colocar os produtos e como apresentá-los aos clientes. No Django, essa configuração nos ajuda a determinar como as páginas da web devem ser exibidas para os usuários:
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',  # Define o backend de templates a ser usado, no caso, o padrão do Django.
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],  # Especifica um diretório onde o Django deve procurar por arquivos de template personalizados.
-        'APP_DIRS': True,  # Permite ao Django procurar por templates dentro de diretórios específicos das apps.
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',  # Isso escolhe a equipe de design (ou motor de templates) que vamos usar, o padrão do Django, conhecido por ser eficiente e fácil de trabalhar.
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],  # Aqui, dizemos onde encontrar os "planos de design" personalizados, ou templates, que criamos especificamente para o nosso site.
+        'APP_DIRS': True,  # Isso permite que o Django automaticamente procure por templates dentro de cada aplicativo, facilitando a organização e a reutilização de designs.
         'OPTIONS': {
             'context_processors': [
-                'django.template.context_processors.debug',  # Adiciona a variável booleana 'debug' ao contexto dos templates.
-                'django.template.context_processors.request',  # Adiciona o objeto 'request' ao contexto dos templates.
-                'django.contrib.auth.context_processors.auth',  # Adiciona variáveis relacionadas à autenticação ao contexto dos templates.
-                'django.contrib.messages.context_processors.messages',  # Adiciona mensagens ao contexto dos templates.
+                'django.template.context_processors.debug',  # Isso inclui informações de depuração nos designs, como etiquetas de preço que só os funcionários podem ver, para ajudar a identificar problemas.
+                'django.template.context_processors.request',  # Adiciona informações sobre o pedido do cliente (ou requisição web) aos designs, permitindo personalizar a experiência de cada visitante.
+                'django.contrib.auth.context_processors.auth',  # Isso inclui informações sobre o cliente (usuário), como nome e status de login, nos designs, para uma saudação personalizada.
+                'django.contrib.messages.context_processors.messages',  # Adiciona mensagens, como promoções ou avisos, que podem ser mostradas aos clientes enquanto eles navegam no site.
             ],
         },
     },
 ]
 
-# Configura os backends de autenticação, que permitem diferentes métodos de autenticação para os usuários.
+
+# AUTHENTICATION_BACKENDS é como ter diferentes portas de entrada para o seu prédio de escritórios. Cada porta permite uma forma diferente de verificar quem você é antes de entrar:
 AUTHENTICATION_BACKENDS = [
-    # Necessário para fazer login pelo nome de usuário no admin do Django, independente do `allauth`.
+    # A primeira porta é a entrada padrão, onde você usa seu crachá de identificação (nome de usuário) para entrar. É o método básico que o próprio Django oferece.
     'django.contrib.auth.backends.ModelBackend',
-    # Métodos de autenticação específicos do `allauth`, como login por e-mail.
+    # A segunda porta é mais moderna e permite que você use seu e-mail como crachá digital. Isso é possível graças a um sistema especial chamado 'allauth', que é como um segurança tecnológico que reconhece diferentes tipos de crachá.
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
-# Define os pacotes de templates que são permitidos pelo Crispy Forms, neste caso, especificando "bootstrap5".
-CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
-# Define o pacote de templates a ser usado por padrão pelo Crispy Forms, também "bootstrap5".
-CRISPY_TEMPLATE_PACK = "bootstrap5"
+# CRISPY_ALLOWED_TEMPLATE_PACKS e CRISPY_TEMPLATE_PACK são como especificar o código de vestimenta e o fornecedor de uniformes para sua empresa. Crispy Forms garante que todos os formulários (como formulários de feedback ou inscrição) sigam um padrão visual agradável e profissional.
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"  # Isso diz que estamos permitindo um código de vestimenta baseado no "Bootstrap 5", um estilo moderno e responsivo para nossos formulários.
+CRISPY_TEMPLATE_PACK = "bootstrap5"  # E decidimos que o "Bootstrap 5" não é apenas permitido, mas será o padrão para todos os nossos uniformes (formulários), garantindo que tudo tenha uma aparência coesa e profissional.
 
 
-
-# Especifica o objeto de aplicação WSGI do Django que o servidor web deve usar para comunicar com o Django.
+# WSGI_APPLICATION é como o sistema de metrô da cidade, que conecta diferentes partes da cidade (o seu site Django) com o mundo exterior (o servidor web). Assim como os trens transportam pessoas de um lugar para outro, o WSGI transporta informações entre o seu site e a internet.
 WSGI_APPLICATION = 'velzon.wsgi.application'
 
-# Configuração do banco de dados
-# Documentação sobre configurações de banco de dados em Django: https://docs.djangoproject.com/en/3.2/ref/settings/#databases
+# A configuração do banco de dados é como o sistema de armazenamento de água da cidade, onde toda a água (dados) é armazenada, tratada e distribuída para casas (partes do seu site) conforme necessário.
 DATABASES = {
-    'default': {  # Configuração para o banco de dados padrão.
-        'ENGINE': 'django.db.backends.postgresql',  # Define o motor do banco de dados como PostgreSQL.
-        'NAME': 'saas_db',  # Nome do banco de dados.
-        'USER': 'adeycson',  # Nome de usuário para autenticação no banco de dados.
-        'PASSWORD': 'gnzZREX55Zr0MmMp6fUE5eHKOzdJc4TZ',  # Senha para autenticação no banco de dados.
-        'HOST': 'dpg-cmui4gf109ks73c2klm0-a.oregon-postgres.render.com',  # Endereço do servidor do banco de dados.
-        'PORT': '5432',  # Porta TCP para conexão com o banco de dados.
+    'default': {  # "default" é o reservatório principal de onde a cidade pega sua água.
+        'ENGINE': 'django.db.backends.postgresql',  # "PostgreSQL" é como um sistema de filtragem avançado que garante a qualidade da água.
+        'NAME': 'saas_db',  # O nome do reservatório, identificando-o entre muitos outros possíveis.
+        'USER': 'adeycson',  # O técnico responsável pela operação e manutenção do reservatório.
+        'PASSWORD': 'gnzZREX55Zr0MmMp6fUE5eHKOzdJc4TZ',  # A chave que permite ao técnico acessar e operar o sistema de filtragem.
+        'HOST': 'dpg-cmui4gf109ks73c2klm0-a.oregon-postgres.render.com',  # A localização do reservatório na vasta rede de infraestrutura da cidade.
+        'PORT': '5432',  # O número do portão através do qual a água é distribuída para a cidade.
     }
 }
 
-# Validação de senha
-# Documentação sobre validadores de senha em Django: https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
+
+# Validação de senha é como o processo de escolher uma senha segura para um clube exclusivo online. Este clube quer ter certeza de que todos os membros escolham senhas fortes para proteger suas contas e informações pessoais. Os critérios para uma senha forte são como as regras para entrar no clube:
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-        # Valida se a senha é muito similar a atributos do usuário.
+        # Este é como o porteiro que verifica se a senha é muito parecida com seu nome, sobrenome ou e-mail. Se for, ele diz que é fácil demais para alguém adivinhar e pede para você tentar outra coisa.
     },
     {
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-        # Valida se a senha tem um comprimento mínimo definido.
+        # Este critério é como uma regra que diz que sua senha deve ser longa o suficiente, como uma senha com um número mínimo de caracteres. É como dizer que você precisa estar bem vestido para entrar no clube.
     },
     {
         'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-        # Valida se a senha não é comum demais.
+        # Aqui, o clube verifica se sua senha é uma daquelas muito comuns e fáceis de adivinhar, como "123456" ou "senha". Se for, eles não vão deixar você usar, porque querem garantir que todos os membros estejam mais seguros.
     },
     {
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-        # Valida se a senha não é inteiramente numérica.
+        # Este é como uma regra que diz que sua senha não pode ser toda feita de números. É como o clube dizer que não basta apenas usar um número de telefone ou data de aniversário como senha; eles querem algo mais complicado para aumentar a segurança.
     },
 ]
 
 
 
-# Configurações de internacionalização
-# Documentação sobre internacionalização (i18n) em Django: https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = 'pt-br'  # Define o código de idioma padrão para 'Português Brasil'.
+# Configurações de internacionalização são como garantir que todos os convidados de diferentes países se sintam bem-vindos no evento, oferecendo sinais e serviços no idioma deles:
+LANGUAGE_CODE = 'pt-br'  # Isso é como decidir que o idioma oficial do evento será o 'Português Brasil', garantindo que todos os sinais e anúncios sejam nesse idioma.
 
-TIME_ZONE = 'America/Sao_Paulo'  # Define a zona de tempo padrão para 'America/Sao_Paulo'.
+TIME_ZONE = 'America/Sao_Paulo'  # Isso define o relógio do evento para a hora de 'São Paulo', assegurando que todos estejam sincronizados, não importa de onde venham.
 
-USE_I18N = True  # Habilita o sistema de internacionalização do Django.
+USE_I18N = True  # Habilita a equipe do evento a traduzir tudo para vários idiomas, tornando o evento acessível para pessoas de todo o mundo.
 
-USE_L10N = True  # Habilita a localização para formatar datas, números e calendários de acordo com o locale do usuário.
+USE_L10N = True  # Isso é como ajustar todos os relógios e calendários do evento para se adaptarem ao formato local de cada convidado, seja ele americano, europeu, etc.
 
-USE_TZ = True  # Habilita o suporte a fuso horário.
+USE_TZ = True  # Garante que, não importa onde os convidados estejam, o evento sempre mostrará a hora certa para eles, considerando seu próprio fuso horário.
 
-# Configurações de arquivos estáticos (CSS, JavaScript, Imagens)
-# Documentação sobre como servir arquivos estáticos em Django: https://docs.djangoproject.com/en/3.2/howto/static-files/
+# Configurações de arquivos estáticos são como preparar todos os banners, folhetos e decorações antes do evento:
+STATIC_URL = '/static/'  # Isso é como dizer onde os convidados podem encontrar todos os banners e folhetos digitais do evento.
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]  # Aqui decidimos quais salas do evento serão decoradas com esses materiais.
+STATIC_ROOT = BASE_DIR / 'staticfiles'  # Isso é o armazém onde guardamos todas as decorações antes de distribuí-las pelo evento.
 
-STATIC_URL = '/static/'  # URL para usar ao referenciar arquivos estáticos localizados em STATIC_ROOT.
-STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]  # Define o(s) diretório(s) onde o Django buscará arquivos estáticos adicionais, além de cada app 'static' diretor.
-STATIC_ROOT = BASE_DIR / 'staticfiles'  # Localização no sistema de arquivos onde os arquivos estáticos serão coletados.
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # Isso é como ter um estúdio de fotografia no evento, onde guardamos todas as fotos e vídeos.
+MEDIA_URL = '/media/'  # E aqui é como dizer aos convidados onde eles podem ver todas essas fotos e vídeos.
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # Diretório base onde os arquivos de mídia serão armazenados.
-MEDIA_URL = '/media/'  # URL para servir os arquivos de mídia armazenados em MEDIA_ROOT.
-
-# Configuração padrão do tipo de campo de chave primária
-# Documentação sobre configuração do campo automático padrão: https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
-
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'  # Define o tipo de campo auto-incrementável padrão para as chaves primárias dos modelos como BigAutoField.
+# Configuração padrão do tipo de campo de chave primária é como decidir usar um sistema de registro avançado para rastrear cada participação no evento:
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'  # Isso é como dar a cada participante um número de identificação único, garantindo que cada registro seja único e bem organizado.
 
 
-# Personalização das tags de mensagens
-# Associa cada nível de mensagem do Django a uma classe CSS para estilização com o Bootstrap.
+# Imagine que estamos ajustando o sistema de comunicação e segurança para um grande festival online, garantindo que as mensagens sejam claras e que a correspondência seja segura:
+
+# Personalização das tags de mensagens:
+# É como definir códigos de cores para diferentes tipos de avisos no festival:
 MESSAGE_TAGS = {
-    messages.DEBUG: "alert-info",  # Mensagens de depuração são estilizadas como alertas de informação.
-    messages.INFO: "alert-info",  # Mensagens informativas também recebem a mesma estilização de alerta de informação.
-    messages.SUCCESS: "alert-success",  # Mensagens de sucesso são estilizadas com alerta de sucesso.
-    messages.WARNING: "alert-warning",  # Mensagens de aviso são estilizadas como alertas de aviso.
-    messages.ERROR: "alert-danger",  # Mensagens de erro são estilizadas como alertas de perigo.
+    messages.DEBUG: "alert-info",  # Informações gerais são azuis, como um lembrete amigável sobre onde encontrar o mapa do festival.
+    messages.INFO: "alert-info",  # Avisos informativos também são azuis, talvez sobre o início de um novo show.
+    messages.SUCCESS: "alert-success",  # Notícias boas são verdes, como confirmar seu ingresso para um evento especial.
+    messages.WARNING: "alert-warning",  # Avisos importantes são amarelos, como um lembrete para beber água.
+    messages.ERROR: "alert-danger",  # Problemas ou erros são vermelhos, alertando sobre uma falha no pagamento.
 }
 
-# Configuração do SMTP para envio de e-mails
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'  # Define o backend de e-mail para utilizar SMTP.
-EMAIL_HOST = 'smtp.sendgrid.net'  # Especifica o servidor SMTP do SendGrid como o servidor de e-mail.
-EMAIL_PORT = 587  # Define a porta 587 para conexão TLS.
-EMAIL_USE_TLS = True  # Habilita o uso de TLS para a conexão de e-mail, uma prática segura para transmissão de dados.
-EMAIL_HOST_USER = 'crm@sistemagenesis.tech'  # Endereço de e-mail verificado do SendGrid utilizado como remetente.
-EMAIL_HOST_PASSWORD = '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'  # Chave de API do SendGrid usada para autenticação no servidor SMTP.
-DEFAULT_FROM_EMAIL = 'crm@sistemagenesis.tech'  # Define o e-mail padrão de remetente para os e-mails enviados.
+# Configuração do SMTP para envio de e-mails:
+# Pensando no festival como um grande evento que precisa se comunicar com milhares de participantes:
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'  # Usamos um sistema postal digital (SMTP) para enviar nossas mensagens.
+EMAIL_HOST = 'smtp.sendgrid.net'  # SendGrid é como a nossa central de correios digital, especializada em enviar grandes volumes de e-mail.
+EMAIL_PORT = 587  # A porta 587 é como escolher um serviço de entrega expressa confiável para nossas mensagens.
+EMAIL_USE_TLS = True  # TLS garante que todas as mensagens sejam seladas e entregues de forma segura, protegendo contra bisbilhoteiros.
+EMAIL_HOST_USER = 'crm@sistemagenesis.tech'  # O endereço de e-mail do festival, de onde todas as comunicações são enviadas.
+EMAIL_HOST_PASSWORD = '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'  # A chave secreta para acessar nossa central de correios digital e enviar e-mails.
+DEFAULT_FROM_EMAIL = 'crm@sistemagenesis.tech'  # O endereço que aparece como remetente quando os participantes recebem nossas mensagens.
 
-EMAIL_SSL_CERTFILE = False  # Desabilita a configuração de caminho para o certificado SSL, não necessário para TLS.
-EMAIL_SSL_KEYFILE = False  # Desabilita a configuração de caminho para a chave SSL, também não necessário para TLS.
+EMAIL_SSL_CERTFILE = False  # Isso diz que não precisamos de um certificado especial para nossa correspondência eletrônica, simplificando o processo.
+EMAIL_SSL_KEYFILE = False  # Similarmente, não precisamos de uma chave especial, mantendo a simplicidade na nossa comunicação.
+
+# Juntando tudo, estas configurações garantem que o festival possa enviar mensagens claras e coloridas para os participantes, enquanto mantém a comunicação por e-mail segura e eficiente, como um sistema postal moderno para um evento global.
 
 
-# Configurações do AllAuth
+# Configurações do AllAuth são como as regras de um clube exclusivo online, garantindo que todos os membros entrem e saiam de forma segura e eficiente:
 
-# Define a URL para redirecionar os usuários após o login bem-sucedido.
+# LOGIN_REDIRECT_URL é como a área de boas-vindas onde os membros são direcionados depois de entrar com sucesso. Aqui, "/" significa a página inicial do clube.
 LOGIN_REDIRECT_URL = "/"
 
-# Define a URL de login, usada para redirecionar usuários não autenticados que tentam acessar páginas que requerem autenticação.
+# LOGIN_URL é a porta da frente do clube, onde os visitantes precisam passar para provar que são membros antes de entrar. "account_login" é como um porteiro digital que verifica sua identidade.
 LOGIN_URL = "account_login"
 
-# Determina se o logout pode ser feito com um GET simples. False aumenta a segurança ao exigir um POST para logout.
+# ACCOUNT_LOGOUT_ON_GET como dizer que para sair do clube, você não pode apenas acenar para o porteiro; você precisa passar por um processo de checkout para garantir que é seguro deixar o local. Isso evita saídas acidentais.
 ACCOUNT_LOGOUT_ON_GET = False
 
-# Obriga os usuários a fornecerem um endereço de e-mail ao se registrarem.
+# ACCOUNT_EMAIL_REQUIRED é como a regra do clube que diz que todos precisam fornecer um e-mail válido na entrada. Isso garante que o clube possa entrar em contato com você sobre eventos futuros e atualizações.
 ACCOUNT_EMAIL_REQUIRED = True
 
-# Define a verificação de e-mail como obrigatória ('mandatory'), o que significa que o usuário precisa verificar seu e-mail para concluir o registro.
+# ACCOUNT_EMAIL_VERIFICATION é a política de verificar o e-mail de todos os novos membros para garantir que eles são quem dizem ser. "mandatory" significa que essa etapa é obrigatória para se tornar um membro.
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 
-# Redireciona usuários autenticados que tentam acessar a página de login ou registro para a página inicial.
+# ACCOUNT_AUTHENTICATED_LOGIN_REDIRECTS é como ter um sistema que, se você já está dentro do clube, não precisa passar pela entrada novamente; você é redirecionado para onde a ação está acontecendo.
 ACCOUNT_AUTHENTICATED_LOGIN_REDIRECTS = True
 
-# Garante que o e-mail usado no registro seja único.
+# ACCOUNT_UNIQUE_EMAIL garante que cada e-mail no clube seja único, como uma carteira de identidade digital, assegurando que cada membro tenha sua própria identificação exclusiva.
 ACCOUNT_UNIQUE_EMAIL = True
 
-# Permite que o login via autenticação social seja feito através de um GET.
+# SOCIALACCOUNT_LOGIN_ON_GET permite que os membros usem suas contas de redes sociais para entrar rapidamente no clube com apenas um clique, tornando o processo de entrada tão fácil quanto dizer "oi" para o porteiro.
 SOCIALACCOUNT_LOGIN_ON_GET = True
 
-# Personalização de formulários do AllAuth
-# Especifica caminhos para formulários personalizados que substituem os padrões do AllAuth para várias ações.
+# Essas configurações do AllAuth são projetadas para tornar a experiência de entrar, participar e sair do seu sistema SaaS tão suave e segura quanto visitar seu clube online favorito, onde cada detalhe, da entrada à saída, é cuidadosamente planejado para a segurança e satisfação dos membros.
+
+
+
+# Personalização de formulários do AllAuth é como customizar a entrada, o registro e os balcões de atendimento da sua loja online para garantir que os clientes tenham uma experiência única e direta:
 ACCOUNT_FORMS = {
-    "login": "velzon.forms.UserLoginForm",  # Formulário personalizado para login.
-    "signup": "velzon.forms.UserRegistrationForm",  # Formulário personalizado para registro.
-    "change_password": "velzon.forms.PasswordChangeForm",  # Formulário personalizado para alteração de senha.
-    "set_password": "velzon.forms.PasswordSetForm",  # Formulário personalizado para definir a senha.
-    "reset_password": "velzon.forms.PasswordResetForm",  # Formulário personalizado para redefinição de senha.
-    "reset_password_from_key": "velzon.forms.PasswordResetKeyForm",  # Formulário para redefinição de senha com chave.
+    "login": "velzon.forms.UserLoginForm",  # Um tapete de boas-vindas personalizado para quando os clientes entram.
+    "signup": "velzon.forms.UserRegistrationForm",  # Um formulário de inscrição, como um cartão de fidelidade especial para novos membros.
+    "change_password": "velzon.forms.PasswordChangeForm",  # Um balcão de serviço onde os clientes podem atualizar a senha, como alterar o PIN do cartão de sócio.
+    "set_password": "velzon.forms.PasswordSetForm",  # Um quiosque para criar uma nova senha, como definir um código para um armário privado.
+    "reset_password": "velzon.forms.PasswordResetForm",  # Um guichê de ajuda para quando os clientes esquecem a senha, como um serviço de redefinição de PIN.
+    "reset_password_from_key": "velzon.forms.PasswordResetKeyForm",  # Um procedimento de segurança adicional para confirmar a identidade antes de redefinir a senha.
 }
 
-# Habilita a consulta de e-mail para contas de mídia social, útil para preencher automaticamente o campo de e-mail durante o registro.
+# SOCIALACCOUNT_QUERY_EMAIL é como ter um assistente virtual que preenche automaticamente o endereço de e-mail dos clientes com base nas informações da conta de mídia social, tornando o processo de inscrição mais rápido e menos tedioso.
 SOCIALACCOUNT_QUERY_EMAIL = True
 
-# Define o ID do site para o django-allauth, útil em projetos com múltiplos sites.
+# SITE_ID é como o número de identificação da sua loja no grande shopping digital. No nosso caso, "2" pode ser o número que diferencia sua loja de outras no mesmo espaço online.
 SITE_ID = 2
 
-# Configurações específicas para provedores de autenticação social, neste caso, Google.
+# Configurações específicas para provedores de autenticação social, neste caso, Google, são como oferecer uma entrada VIP através da conta Google dos seus clientes:
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
-        'SCOPE': [  # Define o escopo de permissões a solicitar.
+        'SCOPE': [  # O escopo é como as informações que você solicita aos clientes para usar essa entrada VIP, como nome e e-mail.
             'profile',
             'email',
         ],
-        'AUTH_PARAMS': {  # Parâmetros de autenticação específicos para o Google.
+        'AUTH_PARAMS': {  # Parâmetros específicos, como "acesso online", garantem que a entrada VIP seja rápida e não guarde as chaves da casa do cliente.
             'access_type': 'online',
         }
     }
