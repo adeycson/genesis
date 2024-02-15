@@ -245,30 +245,31 @@ SOCIALACCOUNT_LOGIN_ON_GET = True
 
 
 
-# Personalização de formulários do AllAuth é como customizar a entrada, o registro e os balcões de atendimento da sua loja online para garantir que os clientes tenham uma experiência única e direta:
+# Personalização de formulários do AllAuth
+# Especifica caminhos para formulários personalizados que substituem os padrões do AllAuth para várias ações.
 ACCOUNT_FORMS = {
-    "login": "velzon.forms.UserLoginForm",  # Um tapete de boas-vindas personalizado para quando os clientes entram.
-    "signup": "velzon.forms.UserRegistrationForm",  # Um formulário de inscrição, como um cartão de fidelidade especial para novos membros.
-    "change_password": "velzon.forms.PasswordChangeForm",  # Um balcão de serviço onde os clientes podem atualizar a senha, como alterar o PIN do cartão de sócio.
-    "set_password": "velzon.forms.PasswordSetForm",  # Um quiosque para criar uma nova senha, como definir um código para um armário privado.
-    "reset_password": "velzon.forms.PasswordResetForm",  # Um guichê de ajuda para quando os clientes esquecem a senha, como um serviço de redefinição de PIN.
-    "reset_password_from_key": "velzon.forms.PasswordResetKeyForm",  # Um procedimento de segurança adicional para confirmar a identidade antes de redefinir a senha.
+    "login": "velzon.forms.UserLoginForm",  # Formulário personalizado para login.
+    "signup": "velzon.forms.UserRegistrationForm",  # Formulário personalizado para registro.
+    "change_password": "velzon.forms.PasswordChangeForm",  # Formulário personalizado para alteração de senha.
+    "set_password": "velzon.forms.PasswordSetForm",  # Formulário personalizado para definir a senha.
+    "reset_password": "velzon.forms.PasswordResetForm",  # Formulário personalizado para redefinição de senha.
+    "reset_password_from_key": "velzon.forms.PasswordResetKeyForm",  # Formulário para redefinição de senha com chave.
 }
 
-# SOCIALACCOUNT_QUERY_EMAIL é como ter um assistente virtual que preenche automaticamente o endereço de e-mail dos clientes com base nas informações da conta de mídia social, tornando o processo de inscrição mais rápido e menos tedioso.
+# Habilita a consulta de e-mail para contas de mídia social, útil para preencher automaticamente o campo de e-mail durante o registro.
 SOCIALACCOUNT_QUERY_EMAIL = True
 
-# SITE_ID é como o número de identificação da sua loja no grande shopping digital. No nosso caso, "2" pode ser o número que diferencia sua loja de outras no mesmo espaço online.
+# Define o ID do site para o django-allauth, útil em projetos com múltiplos sites.
 SITE_ID = 2
 
-# Configurações específicas para provedores de autenticação social, neste caso, Google, são como oferecer uma entrada VIP através da conta Google dos seus clientes:
+# Configurações específicas para provedores de autenticação social, neste caso, Google.
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
-        'SCOPE': [  # O escopo é como as informações que você solicita aos clientes para usar essa entrada VIP, como nome e e-mail.
+        'SCOPE': [  # Define o escopo de permissões a solicitar.
             'profile',
             'email',
         ],
-        'AUTH_PARAMS': {  # Parâmetros específicos, como "acesso online", garantem que a entrada VIP seja rápida e não guarde as chaves da casa do cliente.
+        'AUTH_PARAMS': {  # Parâmetros de autenticação específicos para o Google.
             'access_type': 'online',
         }
     }
