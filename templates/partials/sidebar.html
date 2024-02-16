@@ -7,19 +7,19 @@
                 <!-- Dark Logo-->
                 <a href="{% url 'dashboards:dashboard'%}" class="logo logo-dark">
                     <span class="logo-sm">
-                        <img src="{% static 'images/logo_genesis_sem_texto_PNG.png'%}" alt="" height="22">
+                        <img src="{% static 'images/logo-clientes/Logo_original_horizontal_SELF_Engenharia.png'%}" alt="" height="22"> <!--Logo menor, menu retraído-->
                     </span>
                     <span class="logo-lg">
-                        <img src="{% static 'images/Logo_Genesis_todo_branco.svg'%}" alt="" height="17">
+                        <img src="{% static 'images/logo-clientes/Logo_original_horizontal_SELF_Engenharia.png'%}" alt="" height="50"> <!--Logo MAIOR, menu EXPANDIDO-->
                     </span>
                 </a>
                 <!-- Light Logo-->
                 <a href="{% url 'dashboards:dashboard'%}" class="logo logo-light">
                     <span class="logo-sm">
-                        <img src="{% static 'images/logo_genesis_sem_texto_PNG.png'%}" alt="" height="22">
+                        <img src="{% static 'images/logo-clientes/Logo_original_horizontal_SELF_Engenharia.png'%}" alt="" height="22"> <!--Logo menor, menu retraído-->
                     </span>
                     <span class="logo-lg">
-                        <img src="{% static 'images/logo_genesis_sem_texto_PNG.png'%}" alt="" height="17">
+                        <img src="{% static 'images/logo-clientes/Logo_original_horizontal_SELF_Engenharia.png'%}" alt="" height="50"> <!--Logo MAIOR, menu EXPANDIDO-->
                     </span>
                 </a>
                 <button type="button" class="btn btn-sm p-0 fs-20 header-item float-end btn-vertical-sm-hover" id="vertical-hover">
@@ -42,29 +42,64 @@
                             <div class="collapse menu-dropdown" id="sidebarDashboards">
                                 <ul class="nav nav-sm flex-column">
                                     <li class="nav-item">
+                                        <a href="{% url 'dashboards:dashboard' %}" class="nav-link" data-key="t-ecommerce"> Visão Geral </a>
+                                    </li>
+                                    <li class="nav-item">
                                         <a href="{% url 'dashboards:dashboard_analytics' %}" class="nav-link" data-key="t-analytics"> Analytics </a>
                                     </li>
                                     <li class="nav-item">
                                         <a href="{% url 'dashboards:dashboard_crm' %}" class="nav-link" data-key="t-crm"> CRM </a>
                                     </li>
+<!-- OCULTANDO MENU/DASBOARD/ECOMMERCE
+***************************
                                     <li class="nav-item">
                                         <a href="{% url 'dashboards:dashboard' %}" class="nav-link" data-key="t-ecommerce"> Ecommerce </a>
                                     </li>
+***************************
+FIM OCULTANDO MENU/DASHBOARD/ECOMMERCE-->
+
+<!-- OCULTANDO MENU/DASBOARD/CRYPTO
+***************************
                                     <li class="nav-item">
                                         <a href="{% url 'dashboards:dashboard_crypto' %}" class="nav-link" data-key="t-crypto"> Crypto </a>
                                     </li>
+***************************
+FIM OCULTANDO MENU/DASHBOARD/CRYPTO-->
+
+<!-- OCULTANDO MENU/DASBOARD/PROJECTS
+***************************
                                     <li class="nav-item">
                                         <a href="{% url 'dashboards:dashboard_projects' %}" class="nav-link" data-key="t-projects"> Projects </a>
                                     </li>
+***************************
+FIM OCULTANDO MENU/DASHBOARD/PROJECTS-->
+
+<!-- OCULTANDO MENU/DASBOARD/NFT
+***************************
                                     <li class="nav-item">
                                         <a href="{% url 'dashboards:dashboard_nft' %}" class="nav-link" data-key="t-nft"> NFT </a>
                                     </li>
+***************************
+FIM OCULTANDO MENU/DASHBOARD/NFT-->
+
+<!-- OCULTANDO MENU/DASBOARD/JOB
+***************************
                                     <li class="nav-item">
                                         <a href="{% url 'dashboards:dashboard_job' %}" class="nav-link" data-key="t-job">Job</a>
                                     </li>
                                 </ul>
                             </div>
+***************************
+FIM OCULTANDO MENU/DASHBOARD/JOB-->
+
                         </li> <!-- end Dashboard Menu -->
+
+
+<!-- OCULTANDO MENU APP
+***************************
+***************************
+***************************
+***************************                        
                         <li class="nav-item">
                             <a class="nav-link menu-link" href="#sidebarApps" data-bs-toggle="collapse"
                                 role="button" aria-expanded="false" aria-controls="sidebarApps">
@@ -380,6 +415,18 @@
                             </div>
                         </li>
 
+FIM OCULTANDO MENU APP
+***************************
+***************************
+***************************
+*************************** -->
+
+
+<!-- OCULTANDO MENU LAYOUTS
+***************************
+***************************
+***************************
+***************************
                         <li class="nav-item">
                             <a class="nav-link menu-link" href="#sidebarLayouts" data-bs-toggle="collapse" role="button"
                                 aria-expanded="false" aria-controls="sidebarLayouts">
@@ -404,8 +451,20 @@
                                     </li>
                                 </ul>
                             </div>
-                        </li> <!-- end Dashboard Menu -->
+                        </li> <!-- end Dashboard Menu --
 
+FIM OCULTANDO MENU LAYOUTS
+***************************
+***************************
+***************************
+*************************** -->
+
+
+<!-- OCULTANDO MENU PAGES
+***************************
+***************************
+***************************
+***************************
                         <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-pages">Pages</span></li>
 
                         <li class="nav-item">
@@ -651,8 +710,34 @@
                             </div>
                         </li>
 
+FIM OCULTANDO MENU PAGES
+***************************
+***************************
+***************************
+*************************** -->
+
+
+<!-- OCULTANDO MENU/TÍTULO COMPENENTS
+***************************
+***************************
+***************************
+***************************
+
                         <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-components">Components</span></li>
 
+FIM OCULTANDO MENU/TÍTULO COMPONENTS
+***************************
+***************************
+***************************
+*************************** -->
+
+
+
+<!-- OCULTANDO MENU/BASE UI
+***************************
+***************************
+***************************
+***************************                       
                         <li class="nav-item">
                             <a class="nav-link menu-link" href="#sidebarUI" data-bs-toggle="collapse" role="button"
                                 aria-expanded="false" aria-controls="sidebarUI">
@@ -747,7 +832,18 @@
                                 </div>
                             </div>
                         </li>
+FIM OCULTANDO MENU/BASE UI
+***************************
+***************************
+***************************
+*************************** -->
 
+
+<!-- OCULTANDO MENU/ADVANCE UI
+***************************
+***************************
+***************************
+***************************
                         <li class="nav-item">
                             <a class="nav-link menu-link" href="#sidebarAdvanceUI" data-bs-toggle="collapse" role="button"
                                 aria-expanded="false" aria-controls="sidebarAdvanceUI">
@@ -786,13 +882,34 @@
                                 </ul>
                             </div>
                         </li>
+FIM OCULTANDO MENU/ADVANCE UI
+***************************
+***************************
+***************************
+*************************** -->
 
+<!-- OCULTANDO MENU/WIDGETS
+***************************
+***************************
+***************************
+***************************
                         <li class="nav-item">
                             <a class="nav-link menu-link" href="{% url 'components:widgets' %}">
                                 <i class="ri-honour-line"></i> <span data-key="t-widgets">Widgets</span>
                             </a>
                         </li>
+FIM OCULTANDO MENU/WIDGETS
+***************************
+***************************
+***************************
+*************************** -->
 
+
+<!-- OCULTANDO MENU/FORMS
+***************************
+***************************
+***************************
+***************************
                         <li class="nav-item">
                             <a class="nav-link menu-link" href="#sidebarForms" data-bs-toggle="collapse" role="button"
                                 aria-expanded="false" aria-controls="sidebarForms">
@@ -842,7 +959,18 @@
                                 </ul>
                             </div>
                         </li>
-                        
+FIM OCULTANDO MENU/FORMS
+***************************
+***************************
+***************************
+*************************** -->
+
+
+<!-- OCULTANDO MENU/TABLES
+***************************
+***************************
+***************************
+***************************
                         <li class="nav-item">
                             <a class="nav-link menu-link" href="#sidebarTables" data-bs-toggle="collapse" role="button"
                                 aria-expanded="false" aria-controls="sidebarTables">
@@ -865,7 +993,18 @@
                                 </ul>
                             </div>
                         </li>
+FIM OCULTANDO MENU/FORMS
+***************************
+***************************
+***************************
+*************************** -->
 
+
+<!-- OCULTANDO MENU/CHARTS
+***************************
+***************************
+***************************
+***************************
                         <li class="nav-item">
                             <a class="nav-link menu-link" href="#sidebarCharts" data-bs-toggle="collapse" role="button"
                                 aria-expanded="false" aria-controls="sidebarCharts">
@@ -945,7 +1084,18 @@
                                 </ul>
                             </div>
                         </li>
+FIM OCULTANDO MENU/CHARTS
+***************************
+***************************
+***************************
+*************************** -->
 
+
+<!-- OCULTANDO MENU/ICONS
+***************************
+***************************
+***************************
+***************************
                         <li class="nav-item">
                             <a class="nav-link menu-link" href="#sidebarIcons" data-bs-toggle="collapse" role="button"
                                 aria-expanded="false" aria-controls="sidebarIcons">
@@ -974,7 +1124,18 @@
                                 </ul>
                             </div>
                         </li>
+FIM OCULTANDO MENU/ICONS
+***************************
+***************************
+***************************
+*************************** -->
 
+
+<!-- OCULTANDO MENU/MAPS
+***************************
+***************************
+***************************
+***************************
                         <li class="nav-item">
                             <a class="nav-link menu-link" href="#sidebarMaps" data-bs-toggle="collapse" role="button"
                                 aria-expanded="false" aria-controls="sidebarMaps">
@@ -1000,7 +1161,18 @@
                                 </ul>
                             </div>
                         </li>
+FIM OCULTANDO MENU/MAPS
+***************************
+***************************
+***************************
+*************************** -->
 
+
+<!-- OCULTANDO MENU/MULTI-LEVEL
+***************************
+***************************
+***************************
+***************************
                         <li class="nav-item">
                             <a class="nav-link menu-link" href="#sidebarMultilevel" data-bs-toggle="collapse"
                                 role="button" aria-expanded="false" aria-controls="sidebarMultilevel">
@@ -1015,6 +1187,12 @@
                                         <a href="#sidebarAccount" class="nav-link" data-bs-toggle="collapse" role="button"
                                             aria-expanded="false" aria-controls="sidebarAccount" data-key="t-level-1.2"> Level 1.2
                                         </a>
+FIM OCULTANDO MENU/MULTI-LEVEL
+***************************
+***************************
+***************************
+*************************** -->
+
                                         <div class="collapse menu-dropdown" id="sidebarAccount">
                                             <ul class="nav nav-sm flex-column">
                                                 <li class="nav-item">
@@ -1048,6 +1226,7 @@
             </div>
             <div class="sidebar-background"></div>
         </div>
+        
         <!-- Left Sidebar End -->
         <!-- Vertical Overlay-->
         <div class="vertical-overlay"></div>
